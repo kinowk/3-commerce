@@ -1,5 +1,6 @@
 package com.loopers.domain.user;
 
+import com.loopers.domain.user.attribute.Gender;
 import com.loopers.support.error.CoreException;
 import com.loopers.support.error.ErrorType;
 import jakarta.persistence.*;
@@ -41,13 +42,13 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
-    private String gender;
+    private Gender gender;
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
     private static final Pattern LOGIN_ID_PATTERN = Pattern.compile("^[A-Za-z0-9]{1,10}$");
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
 
-    public User(String username, String loginId, String password, String email, String birthDate, String gender) {
+    public User(String username, String loginId, String password, String email, String birthDate, Gender gender) {
         validateUserName(username);
         validateLoginId(loginId);
         validatePassword(password);
@@ -99,8 +100,8 @@ public class User {
         }
     }
 
-    private void validateGender(String gender) {
-        if (!StringUtils.hasText(gender)) {
+    private void validateGender(Gender gender) {
+        if (gender == null) {
             throw new CoreException(ErrorType.BAD_REQUEST, "Gender cannot be empty");
         }
     }
