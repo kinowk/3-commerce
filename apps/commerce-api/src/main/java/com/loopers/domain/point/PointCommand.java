@@ -10,4 +10,10 @@ public class PointCommand {
             Long amount
     ) {
     }
+
+    public record Use(
+            Long userId,
+            Long amount
+    ) {
+    }
 }

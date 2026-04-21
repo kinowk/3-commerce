@@ -31,7 +31,7 @@ public class PointService {
         Long userId = command.userId();
         Long amount = command.amount();
 
-        User user = userRepository.findById(userId)
+        userRepository.findById(userId)
                 .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
 
         Point point = pointRepository.findByUserId(userId)
@@ -44,5 +44,23 @@ public class PointService {
         pointRepository.save(pointHistory);
 
         return PointResult.Charge.from(savedPoint);
+    }
+
+    @Transactional
+    public PointResult.Use use(PointCommand.Use command) {
+        Long userId = command.userId();
+        Long amount = command.amount();
+
+        userRepository.findById(userId)
+                .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
+
+        Point point = pointRepository.findByUserId(userId)
+                .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
+        point.deduct(amount);
+
+        PointHistory pointHistory = new PointHistory(point.getId(), userId, amount, PointHistoryType.USE, "포인트 사용");
+        pointRepository.save(pointHistory);
+
+        return PointResult.Use.from(point);
     }
 }

@@ -18,13 +18,23 @@ public class PointResult {
     }
 
     public record Charge(
-            Long pointId,
             Long userId,
             Long balance
     ) {
         public static Charge from(Point point) {
             return new Charge(
-                    point.getId(),
+                    point.getUserId(),
+                    point.getBalance()
+            );
+        }
+    }
+
+    public record Use(
+            Long userId,
+            Long balance
+    ) {
+        public static Use from(Point point) {
+            return new Use(
                     point.getUserId(),
                     point.getBalance()
             );
