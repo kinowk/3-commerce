@@ -12,7 +12,7 @@ public class PointResult {
         public static GetPoint from(Point point) {
             return new GetPoint(
                     point.getUserId(),
-                    point.getUserId()
+                    point.getBalance()
             );
         }
     }
