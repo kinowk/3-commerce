@@ -43,7 +43,7 @@ public class PointService {
         PointHistory pointHistory = new PointHistory(savedPoint.getId(), userId, amount, PointHistoryType.USE, "포인트 사용");
         pointRepository.save(pointHistory);
 
-        return PointResult.Charge.from(savedPoint);
+        return PointResult.Charge.of(savedPoint, amount);
     }
 
     @Transactional
@@ -61,6 +61,6 @@ public class PointService {
         PointHistory pointHistory = new PointHistory(point.getId(), userId, amount, PointHistoryType.USE, "포인트 사용");
         pointRepository.save(pointHistory);
 
-        return PointResult.Use.from(point);
+        return PointResult.Use.of(point, amount);
     }
 }
