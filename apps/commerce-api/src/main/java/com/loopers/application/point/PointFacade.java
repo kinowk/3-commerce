@@ -1,0 +1,32 @@
+package com.loopers.application.point;
+
+import com.loopers.domain.point.PointCommand;
+import com.loopers.domain.point.PointResult;
+import com.loopers.domain.point.PointService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+public class PointFacade {
+
+    private final PointService pointService;
+
+    public PointOutput.GetPoint getPoint(PointInput.GetPoint input) {
+        Long userId = input.userId();
+        PointResult.GetPoint result = pointService.getPoint(userId);
+        return PointOutput.GetPoint.from(result);
+    }
+
+    public PointOutput.Charge charge(PointInput.Charge input) {
+        PointCommand.Charge command = input.toCommand();
+        PointResult.Charge result = pointService.charge(command);
+        return PointOutput.Charge.from(result);
+    }
+
+    public PointOutput.Use use(PointInput.Use input) {
+        PointCommand.Use command = input.toCommand();
+        PointResult.Use result = pointService.use(command);
+        return PointOutput.Use.from(result);
+    }
+}
