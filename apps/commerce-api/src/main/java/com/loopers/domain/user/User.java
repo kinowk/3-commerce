@@ -50,7 +50,7 @@ public class User extends BaseEntity {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
 
     public User(String username, String loginId, String password, String email, String birthDate, Gender gender) {
-        validateUserName(username);
+        validateUsername(username);
         validateLoginId(loginId);
         validatePassword(password);
         validateEmail(email);
@@ -65,7 +65,7 @@ public class User extends BaseEntity {
         this.gender = gender;
     }
 
-    private void validateUserName(String username) {
+    private void validateUsername(String username) {
         if (!StringUtils.hasText(username)) {
             throw new CoreException(ErrorType.BAD_REQUEST, "Username cannot be empty");
         }
