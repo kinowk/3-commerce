@@ -28,9 +28,4 @@ public class UserInput {
             );
         }
     }
-
-    public record GetUser(
-            String loginId
-    ) {
-    }
 }

@@ -18,8 +18,7 @@ public class UserFacade {
         return UserOutput.Join.from(result);
     }
 
-    public UserOutput.GetUser getUser(UserInput.GetUser input) {
-        String loginId = input.loginId();
+    public UserOutput.GetUser getUser(String loginId) {
         UserResult.GetUser result = userService.getUser(loginId);
         return UserOutput.GetUser.from(result);
     }
