@@ -15,7 +15,7 @@ public class UserV1Controller {
     private final UserFacade userFacade;
 
     @PostMapping
-    public ApiResponse<UserResponse.Join> join(UserRequest.Join request) {
+    public ApiResponse<UserResponse.Join> join(@RequestBody UserRequest.Join request) {
         UserInput.Join input = request.toInput();
         UserOutput.Join output = userFacade.join(input);
         UserResponse.Join response = UserResponse.Join.from(output);
