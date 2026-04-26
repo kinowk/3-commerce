@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 public class PointResult {
     public record GetPoint(
             Long id,
-            Long userId,
+            String loginId,
             Long balance
     ) {
-        public static GetPoint from(Point point) {
+        public static GetPoint of(Point point, String loginId) {
             return new GetPoint(
                     point.getId(),
-                    point.getUserId(),
+                    loginId,
                     point.getBalance()
             );
         }

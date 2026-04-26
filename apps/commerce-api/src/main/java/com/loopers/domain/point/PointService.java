@@ -21,9 +21,10 @@ public class PointService {
         User user = userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
 
-        return pointRepository.findByUserId(user.getId())
-                .map(PointResult.GetPoint::from)
+        Point point = pointRepository.findByUserId(user.getId())
                 .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
+
+        return PointResult.GetPoint.of(point, user.getLoginId());
     }
 
     @Transactional

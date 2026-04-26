@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 public class PointOutput {
     public record GetPoint(
             Long id,
-            Long userId,
+            String loginId,
             Long balance
     ) {
         public static GetPoint from(PointResult.GetPoint result) {
             return new GetPoint(
                     result.id(),
-                    result.userId(),
+                    result.loginId(),
                     result.balance()
             );
         }
