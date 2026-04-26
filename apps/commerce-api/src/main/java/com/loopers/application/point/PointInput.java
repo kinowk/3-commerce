@@ -8,24 +8,24 @@ import lombok.NoArgsConstructor;
 public class PointInput {
 
     public record Charge(
-            Long userId,
+            String loginId,
             Long amount
     ) {
         public PointCommand.Charge toCommand() {
             return new PointCommand.Charge(
-                    userId,
+                    loginId,
                     amount
             );
         }
     }
 
     public record Use(
-            Long userId,
+            String loginId,
             Long amount
     ) {
         public PointCommand.Use toCommand() {
             return new PointCommand.Use(
-                    userId,
+                    loginId,
                     amount
             );
         }

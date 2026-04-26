@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PointCommand {
     public record Charge(
-            Long userId,
+            String loginId,
             Long amount
     ) {
     }
 
     public record Use(
-            Long userId,
+            String loginId,
             Long amount
     ) {
     }

@@ -21,14 +21,14 @@ public class PointResult {
 
     public record Charge(
             Long id,
-            Long userId,
+            String loginId,
             Long balance,
             Long amount
     ) {
-        public static Charge of(Point point, Long amount) {
+        public static Charge of(Point point, String loginId, Long amount) {
             return new Charge(
                     point.getId(),
-                    point.getUserId(),
+                    loginId,
                     point.getBalance(),
                     amount
             );
@@ -37,14 +37,14 @@ public class PointResult {
 
     public record Use(
             Long id,
-            Long userId,
+            String loginId,
             Long balance,
             Long amount
     ) {
-        public static Use of(Point point, Long amount) {
+        public static Use of(Point point, String loginId, Long amount) {
             return new Use(
                     point.getId(),
-                    point.getUserId(),
+                    loginId,
                     point.getBalance(),
                     amount
             );

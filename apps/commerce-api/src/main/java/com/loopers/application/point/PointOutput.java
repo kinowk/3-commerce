@@ -22,14 +22,14 @@ public class PointOutput {
 
     public record Charge(
             Long id,
-            Long userId,
+            String loginId,
             Long balance,
             Long amount
     ) {
         public static Charge from(PointResult.Charge result) {
             return new Charge(
                     result.id(),
-                    result.userId(),
+                    result.loginId(),
                     result.balance(),
                     result.amount()
             );
@@ -38,14 +38,14 @@ public class PointOutput {
 
     public record Use(
             Long id,
-            Long userId,
+            String loginId,
             Long balance,
             Long amount
     ) {
         public static Use from(PointResult.Use result) {
             return new Use(
                     result.id(),
-                    result.userId(),
+                    result.loginId(),
                     result.balance(),
                     result.amount()
             );

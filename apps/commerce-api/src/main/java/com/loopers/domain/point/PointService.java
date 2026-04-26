@@ -29,39 +29,39 @@ public class PointService {
 
     @Transactional
     public PointResult.Charge charge(PointCommand.Charge command) {
-        Long userId = command.userId();
+        String loginId = command.loginId();
         Long amount = command.amount();
 
-        userRepository.findById(userId)
+        User user = userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
 
-        Point point = pointRepository.findByUserId(userId)
+        Point point = pointRepository.findByUserId(user.getId())
                 .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
 
         point.charge(amount);
         Point savedPoint = pointRepository.save(point);
 
-        PointHistory pointHistory = new PointHistory(savedPoint.getId(), userId, amount, PointHistoryType.USE, "포인트 사용");
+        PointHistory pointHistory = new PointHistory(savedPoint.getId(), user.getId(), amount, PointHistoryType.USE, "포인트 사용");
         pointRepository.save(pointHistory);
 
-        return PointResult.Charge.of(savedPoint, amount);
+        return PointResult.Charge.of(savedPoint, loginId, amount);
     }
 
     @Transactional
     public PointResult.Use use(PointCommand.Use command) {
-        Long userId = command.userId();
+        String loginId = command.loginId();
         Long amount = command.amount();
 
-        userRepository.findById(userId)
+        User user = userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
 
-        Point point = pointRepository.findByUserId(userId)
+        Point point = pointRepository.findByUserId(user.getId())
                 .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
         point.deduct(amount);
 
-        PointHistory pointHistory = new PointHistory(point.getId(), userId, amount, PointHistoryType.USE, "포인트 사용");
+        PointHistory pointHistory = new PointHistory(point.getId(), user.getId(), amount, PointHistoryType.USE, "포인트 사용");
         pointRepository.save(pointHistory);
 
-        return PointResult.Use.of(point, amount);
+        return PointResult.Use.of(point, loginId, amount);
     }
 }
