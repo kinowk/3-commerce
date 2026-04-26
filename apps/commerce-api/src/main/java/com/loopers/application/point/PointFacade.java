@@ -12,9 +12,8 @@ public class PointFacade {
 
     private final PointService pointService;
 
-    public PointOutput.GetPoint getPoint(PointInput.GetPoint input) {
-        Long userId = input.userId();
-        PointResult.GetPoint result = pointService.getPoint(userId);
+    public PointOutput.GetPoint getPoint(String loginId) {
+        PointResult.GetPoint result = pointService.getPoint(loginId);
         return PointOutput.GetPoint.from(result);
     }
 

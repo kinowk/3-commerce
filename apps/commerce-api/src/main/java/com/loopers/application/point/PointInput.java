@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PointInput {
 
-    public record GetPoint(Long userId) {
-    }
-
     public record Charge(
             Long userId,
             Long amount

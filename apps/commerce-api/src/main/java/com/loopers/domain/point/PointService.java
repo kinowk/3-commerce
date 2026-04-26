@@ -17,11 +17,11 @@ public class PointService {
     private final UserRepository userRepository;
     private final PointRepository pointRepository;
 
-    public PointResult.GetPoint getPoint(Long userId) {
-        userRepository.findById(userId)
+    public PointResult.GetPoint getPoint(String loginId) {
+        User user = userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
 
-        return pointRepository.findByUserId(userId)
+        return pointRepository.findByUserId(user.getId())
                 .map(PointResult.GetPoint::from)
                 .orElseThrow(() -> new CoreException(ErrorType.NOT_FOUND));
     }
