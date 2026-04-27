@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "likes")
-public class Like extends BaseEntity {
+@Table(name = "like_products")
+public class LikeProduct extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Like extends BaseEntity {
     @Column(name = "ref_product_id", nullable = false, updatable = false)
     private Long productId;
 
-    public Like(Long userId, Long productId) {
+    public LikeProduct(Long userId, Long productId) {
         validateUserId(userId);
         validateProductId(productId);
 
