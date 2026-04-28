@@ -16,7 +16,7 @@ public class LikeProduct extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "like_id", nullable = false, updatable = false)
+    @Column(name = "like_product_id", nullable = false, updatable = false)
     private Long id;
 
     @Column(name = "ref_user_id", nullable = false, updatable = false)
