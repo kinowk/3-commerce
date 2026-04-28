@@ -8,17 +8,6 @@ import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LikeProductResponse {
-    public record Like(
-            Long productId,
-            Long likeCount
-    ) {
-    }
-
-    public record Unlike(
-            Long productId,
-            Long likeCount
-    ) {
-    }
 
     public record GetLikedProducts(
             List<Product> products
